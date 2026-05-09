@@ -1,0 +1,68 @@
+experiment:
+  stage: representation
+  data_root: "/Users/home2/Desktop/xy/year1 /summer project"
+  tarball: "/Users/home2/Desktop/xy/year1 /summer project/speech_commands_v0.02.tar.gz"
+  output_dir: "outputs/representation"
+  labels: ["yes", "no"]
+  files_per_label: 2
+  max_files:
+  selection: first
+  seed: 0
+  include_baseline: true
+  save_recon_audio: false
+
+base_config:
+  sample_rate: 16000
+  frame_size_ms: 25
+  hop_ms: 10
+  n_mels: 80
+  fmin_hz: 0
+  fmax_hz: 8000
+  representation_type: mel
+  n_mfcc: 20
+  mel_scale: linear
+  normalization_method: none
+  dynamic_range_db:
+  quant_bits: 0
+  time_downsample_factor: 1
+  time_downsample_method: none
+  frequency_mask: none
+  snr_db:
+  noise_type: white
+  reconstruction_method: griffin_lim
+  griffin_lim_iters: 16
+  whisper_model: tiny
+
+analysis:
+  safe_accuracy_drop: 0.02
+  useful_accuracy_drop: 0.05
+  collapse_accuracy_drop: 0.15
+  min_useful_compression_gain: 0.10
+
+parameters:
+  - name: frame_size_ms
+    values: [10, 15, 20, 25, 30, 40, 50, 75, 100]
+    description: "Temporal/frequency tradeoff from short to long STFT frames."
+  - name: hop_ms
+    values: [5, 10, 15, 20, 25, 30, 40, 50]
+    description: "Frame step size and temporal compression."
+  - name: n_mels
+    values: [16, 24, 32, 40, 48, 64, 80, 100, 128]
+    description: "Spectral resolution of the mel representation."
+  - name: fmin_hz
+    values: [0, 50, 100, 200, 300, 500]
+    description: "Low-frequency cutoff."
+  - name: fmax_hz
+    values: [2000, 2500, 3000, 3400, 4000, 5000, 6000, 7000, 8000]
+    description: "High-frequency cutoff, including telephone-band region."
+  - name: representation_type
+    values: [mel, mfcc]
+    description: "Test mel representation against MFCC coefficient representation."
+  - name: n_mfcc
+    values: [8, 13, 20, 30, 40]
+    fixed_overrides:
+      representation_type: mfcc
+    description: "Number of retained MFCC coefficients."
+  - name: frequency_mask
+    values: [none, low_below_300, high_above_3400, high_above_4000, high_above_6000, band_300_1000, band_4000_8000]
+    description: "Controlled frequency-band removal beyond simple fmin/fmax."

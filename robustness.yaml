@@ -1,0 +1,50 @@
+experiment:
+  stage: robustness
+  data_root: "/Users/home2/Desktop/xy/year1 /summer project"
+  tarball: "/Users/home2/Desktop/xy/year1 /summer project/speech_commands_v0.02.tar.gz"
+  output_dir: "outputs/robustness"
+  labels: ["yes", "no"]
+  files_per_label: 2
+  max_files:
+  selection: first
+  seed: 0
+  include_baseline: true
+  save_recon_audio: false
+
+base_config:
+  sample_rate: 16000
+  frame_size_ms: 25
+  hop_ms: 10
+  n_mels: 80
+  fmin_hz: 0
+  fmax_hz: 8000
+  representation_type: mel
+  n_mfcc: 20
+  mel_scale: linear
+  normalization_method: none
+  dynamic_range_db:
+  quant_bits: 0
+  time_downsample_factor: 1
+  time_downsample_method: none
+  frequency_mask: none
+  snr_db:
+  noise_type: white
+  reconstruction_method: griffin_lim
+  griffin_lim_iters: 16
+  whisper_model: tiny
+
+analysis:
+  safe_accuracy_drop: 0.02
+  useful_accuracy_drop: 0.05
+  collapse_accuracy_drop: 0.15
+  min_useful_compression_gain: 0.10
+
+parameters:
+  - name: snr_db
+    values: [40, 30, 20, 15, 10, 5, 0, -5]
+    description: "Noise level from nearly clean to very noisy."
+  - name: noise_type
+    values: [white, pink, brown]
+    fixed_overrides:
+      snr_db: 10
+    description: "Noise color/type at a fixed SNR."

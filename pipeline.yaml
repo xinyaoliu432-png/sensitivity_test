@@ -1,0 +1,51 @@
+experiment:
+  stage: pipeline
+  data_root: "/Users/home2/Desktop/xy/year1 /summer project"
+  tarball: "/Users/home2/Desktop/xy/year1 /summer project/speech_commands_v0.02.tar.gz"
+  output_dir: "outputs/pipeline"
+  labels: ["yes", "no"]
+  files_per_label: 2
+  max_files:
+  selection: first
+  seed: 0
+  include_baseline: true
+  save_recon_audio: false
+
+base_config:
+  sample_rate: 16000
+  frame_size_ms: 25
+  hop_ms: 10
+  n_mels: 80
+  fmin_hz: 0
+  fmax_hz: 8000
+  representation_type: mel
+  n_mfcc: 20
+  mel_scale: linear
+  normalization_method: none
+  dynamic_range_db:
+  quant_bits: 0
+  time_downsample_factor: 1
+  time_downsample_method: none
+  frequency_mask: none
+  snr_db:
+  noise_type: white
+  reconstruction_method: griffin_lim
+  griffin_lim_iters: 16
+  whisper_model: tiny
+
+analysis:
+  safe_accuracy_drop: 0.02
+  useful_accuracy_drop: 0.05
+  collapse_accuracy_drop: 0.15
+  min_useful_compression_gain: 0.10
+
+parameters:
+  - name: reconstruction_method
+    values: [griffin_lim, zero_phase]
+    description: "Reconstruction algorithm choice. Griffin-Lim is the real baseline; zero_phase is a deliberately cheap classical comparison."
+  - name: griffin_lim_iters
+    values: [4, 8, 16, 32, 64]
+    description: "Reconstruction quality versus compute cost."
+  - name: whisper_model
+    values: [tiny, base]
+    description: "Evaluation model choice. Add small/medium later if compute time is acceptable."

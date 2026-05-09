@@ -1,0 +1,64 @@
+experiment:
+  stage: compression_method
+  data_root: "/Users/home2/Desktop/xy/year1 /summer project"
+  tarball: "/Users/home2/Desktop/xy/year1 /summer project/speech_commands_v0.02.tar.gz"
+  output_dir: "outputs/compression_method"
+  labels: ["yes", "no"]
+  files_per_label: 2
+  max_files:
+  selection: first
+  seed: 0
+  include_baseline: true
+  save_recon_audio: false
+
+base_config:
+  sample_rate: 16000
+  frame_size_ms: 25
+  hop_ms: 10
+  n_mels: 80
+  fmin_hz: 0
+  fmax_hz: 8000
+  representation_type: mel
+  n_mfcc: 20
+  mel_scale: linear
+  normalization_method: none
+  dynamic_range_db:
+  quant_bits: 0
+  time_downsample_factor: 1
+  time_downsample_method: none
+  frequency_mask: none
+  snr_db:
+  noise_type: white
+  reconstruction_method: griffin_lim
+  griffin_lim_iters: 16
+  whisper_model: tiny
+
+analysis:
+  safe_accuracy_drop: 0.02
+  useful_accuracy_drop: 0.05
+  collapse_accuracy_drop: 0.15
+  min_useful_compression_gain: 0.10
+
+parameters:
+  - name: mel_scale
+    values: [linear, log]
+    description: "Linear mel versus log-compressed mel storage."
+  - name: normalization_method
+    values: [none, per_file_minmax, per_file_zscore]
+    description: "Normalization before quantization/storage."
+  - name: dynamic_range_db
+    values: [null, 80, 60, 40, 30, 20]
+    description: "Clip very quiet mel values relative to each file peak."
+  - name: quant_bits
+    values: [0, 16, 12, 10, 8, 6, 5, 4, 3, 2]
+    description: "Representation precision."
+  - name: time_downsample_factor
+    values: [1, 2, 3, 4, 5]
+    fixed_overrides:
+      time_downsample_method: linear
+    description: "Reduce number of time frames then interpolate back for reconstruction."
+  - name: time_downsample_method
+    values: [none, decimate, mean, linear]
+    fixed_overrides:
+      time_downsample_factor: 3
+    description: "Compare time downsampling methods at a fixed factor."
