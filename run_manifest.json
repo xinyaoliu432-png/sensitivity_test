@@ -1,0 +1,76 @@
+{
+  "config_path": "/Users/home2/Documents/Codex/2026-05-08/sensitivity-test-1-goal-of-sensitivity/example_frame_size_config.yaml",
+  "config": {
+    "experiment": {
+      "stage": "example_frame_size",
+      "data_root": "/Users/home2/Desktop/xy/year1 /summer project",
+      "tarball": "/Users/home2/Desktop/xy/year1 /summer project/speech_commands_v0.02.tar.gz",
+      "output_dir": "/Users/home2/Library/CloudStorage/OneDrive-ImperialCollegeLondon/Summer project 2/version 2/example output",
+      "labels": [
+        "yes",
+        "no"
+      ],
+      "files_per_label": 4,
+      "max_files": null,
+      "selection": "first",
+      "seed": 0,
+      "include_baseline": true,
+      "save_recon_audio": true
+    },
+    "base_config": {
+      "sample_rate": 16000,
+      "frame_size_ms": 25,
+      "hop_ms": 10,
+      "n_mels": 80,
+      "fmin_hz": 0,
+      "fmax_hz": 8000,
+      "representation_type": "mel",
+      "n_mfcc": 20,
+      "mel_scale": "linear",
+      "normalization_method": "none",
+      "dynamic_range_db": null,
+      "quant_bits": 0,
+      "time_downsample_factor": 1,
+      "time_downsample_method": "none",
+      "frequency_mask": "none",
+      "snr_db": null,
+      "noise_type": "white",
+      "reconstruction_method": "griffin_lim",
+      "griffin_lim_iters": 16,
+      "whisper_model": "tiny"
+    },
+    "analysis": {
+      "safe_accuracy_drop": 0.02,
+      "useful_accuracy_drop": 0.05,
+      "collapse_accuracy_drop": 0.15,
+      "min_useful_compression_gain": 0.1
+    },
+    "parameters": [
+      {
+        "name": "frame_size_ms",
+        "values": [
+          10,
+          15,
+          20,
+          25,
+          30,
+          40,
+          50,
+          75,
+          100
+        ],
+        "description": "Example frame-size sensitivity run."
+      }
+    ]
+  },
+  "files": [
+    "/Users/home2/Desktop/xy/year1 /summer project/yes/004ae714_nohash_0.wav",
+    "/Users/home2/Desktop/xy/year1 /summer project/yes/004ae714_nohash_1.wav",
+    "/Users/home2/Desktop/xy/year1 /summer project/yes/00970ce1_nohash_0.wav",
+    "/Users/home2/Desktop/xy/year1 /summer project/yes/00f0204f_nohash_0.wav",
+    "/Users/home2/Desktop/xy/year1 /summer project/no/012c8314_nohash_0.wav",
+    "/Users/home2/Desktop/xy/year1 /summer project/no/0132a06d_nohash_0.wav",
+    "/Users/home2/Desktop/xy/year1 /summer project/no/0132a06d_nohash_1.wav",
+    "/Users/home2/Desktop/xy/year1 /summer project/no/0132a06d_nohash_2.wav"
+  ]
+}

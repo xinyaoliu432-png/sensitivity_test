@@ -1,0 +1,10 @@
+stage,parameter,parameter_value,baseline_value,num_files,average_accuracy,average_asr_accuracy,average_wer,average_original_accuracy,average_compression_rate,average_waveform_snr_db,average_mel_mse
+example_frame_size,frame_size_ms,10,25,8,0.125,0.125,0.875,0.875,0.9911770234483125,-16.82870815162707,0.0
+example_frame_size,frame_size_ms,15,25,8,0.625,0.625,0.375,0.875,0.9911770234483125,-3.6623443238555975,0.0
+example_frame_size,frame_size_ms,20,25,8,0.875,0.875,0.125,0.875,0.9911770234483125,-2.7751206800577046,0.0
+example_frame_size,frame_size_ms,25,25,8,0.875,0.875,0.125,0.875,0.9911770234483125,-2.7392200149003587,0.0
+example_frame_size,frame_size_ms,30,25,8,0.875,0.875,0.125,0.875,0.9911770234483125,-3.2084449659027543,0.0
+example_frame_size,frame_size_ms,40,25,8,0.875,0.875,0.125,0.875,0.9911770234483125,-2.6547954089222445,0.0
+example_frame_size,frame_size_ms,50,25,8,0.875,0.875,0.125,0.875,0.9911770234483125,-2.5973221572878296,0.0
+example_frame_size,frame_size_ms,75,25,8,0.875,0.875,0.125,0.875,0.9911770234483125,-2.3843516612060296,0.0
+example_frame_size,frame_size_ms,100,25,8,0.875,0.875,0.125,0.875,0.9911770234483125,-2.0352048779544756,0.0
